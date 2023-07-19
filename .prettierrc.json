@@ -2,6 +2,6 @@
     "useTabs": false,
     "tabWidth": 4,
     "singleQuote": false,
-    "printWidth": 256,
+    "printWidth": 150,
     "trailingComma": "es5"
 }

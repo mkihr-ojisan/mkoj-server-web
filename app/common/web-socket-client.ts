@@ -112,6 +112,7 @@ export type Player = {
     name: string;
     uuid: string;
     type: "java" | "bedrock";
+    lastLogin: number;
 };
 
 export class PlayerJoinEvent extends Event {
