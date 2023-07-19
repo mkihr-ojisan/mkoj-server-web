@@ -1,4 +1,5 @@
 import { ActivePlayers } from "./components/ActivePlayers";
+import { CopyServerAddressButton } from "./components/CopyServerAddressButton";
 
 export default function Home() {
     return (
@@ -6,7 +7,7 @@ export default function Home() {
             <h1>むかおじサーバー</h1>
             バージョン: Java Edition 1.20.1(推奨), Java Edition 1.8.x-1.20.1, Bedrock Edition 1.19.80-1.20.10
             <br />
-            アドレス: mc.mkihr-ojisan.com <button>コピー</button>
+            アドレス: mc.mkihr-ojisan.com <CopyServerAddressButton />
             <br />
             <br />
             <a href="/maps/">地図</a>
