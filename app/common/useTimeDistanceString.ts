@@ -7,19 +7,14 @@ export function useTimeDistanceString(date: Date) {
     const update = useCallback(() => {
         const now = new Date();
         const diff = now.getTime() - date.getTime();
-        if (diff < 1000 * 60) {
-            setText(`${Math.floor(diff / 1000)}秒`);
-            timer.current = setTimeout(update, 1000 - (diff % 1000));
-        } else if (diff < 1000 * 60 * 60) {
-            setText(`${Math.floor(diff / (1000 * 60))}分`);
-            timer.current = setTimeout(update, 1000 * 60 - (diff % (1000 * 60)));
-        } else if (diff < 1000 * 60 * 60 * 24) {
-            setText(`${Math.floor(diff / (1000 * 60 * 60))}時間`);
-            timer.current = setTimeout(update, 1000 * 60 * 60 - (diff % (1000 * 60 * 60)));
-        } else {
-            setText(`${Math.floor(diff / (1000 * 60 * 60 * 24))}日`);
-            timer.current = setTimeout(update, 1000 * 60 * 60 * 24 - (diff % (1000 * 60 * 60 * 24)));
-        }
+        setText(
+            `${Math.floor(diff / 3600000).toString()}:${Math.floor((diff % 3600000) / 60000)
+                .toString()
+                .padStart(2, "0")}:${Math.floor((diff % 60000) / 1000)
+                .toString()
+                .padStart(2, "0")}`
+        );
+        timer.current = setTimeout(update, 1000 - (diff % 1000));
     }, [date]);
 
     useEffect(() => {

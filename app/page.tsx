@@ -1,4 +1,4 @@
-import { ActivePlayers } from "./components/ActivePlayers";
+import { ActivePlayers } from "./components/active-players/ActivePlayers";
 import { CopyServerAddressButton } from "./components/CopyServerAddressButton";
 
 export default function Home() {
@@ -105,7 +105,8 @@ export default function Home() {
                     <a href="https://essentialsx.net/">EssentialsX</a> - よくわからんけど便利そうなやつ
                 </li>
                 <li>
-                    <a href="https://geysermc.org/">GeyserMC</a>, <a href="https://github.com/GeyserMC/Floodgate">Floodgate</a> - Bedrock Editionで入れるようになるやつ
+                    <a href="https://geysermc.org/">GeyserMC</a>, <a href="https://github.com/GeyserMC/Floodgate">Floodgate</a> - Bedrock
+                    Editionで入れるようになるやつ
                 </li>
                 <li>
                     <a href="https://luckperms.net/">LuckPerms</a> - 権限を管理するやつ
@@ -114,10 +115,12 @@ export default function Home() {
                     <a href="https://www.spigotmc.org/resources/protocollib.1997/">ProtocolLib</a> - 前提プラグイン的なやつ
                 </li>
                 <li>
-                    <a href="https://www.spigotmc.org/resources/stackmob-enhance-your-servers-performance-without-the-sacrifice.29999/">StackMob</a> - Mobをまとめるやつ
+                    <a href="https://www.spigotmc.org/resources/stackmob-enhance-your-servers-performance-without-the-sacrifice.29999/">StackMob</a> -
+                    Mobをまとめるやつ
                 </li>
                 <li>
-                    <a href="https://www.spigotmc.org/resources/viabackwards.27448/">ViaBackwards</a>, <a href="https://www.spigotmc.org/resources/viarewind.52109/">ViaRewind</a>,{" "}
+                    <a href="https://www.spigotmc.org/resources/viabackwards.27448/">ViaBackwards</a>,{" "}
+                    <a href="https://www.spigotmc.org/resources/viarewind.52109/">ViaRewind</a>,{" "}
                     <a href="https://www.spigotmc.org/resources/viaversion.19254/">ViaVersion</a> - バージョンが多少違っても入れるようになるやつ
                 </li>
                 <li>

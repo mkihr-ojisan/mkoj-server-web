@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { Player } from "../common/web-socket-client";
-import { useTimeDistanceString } from "../common/useTimeDistanceString";
+import { Player } from "../../common/web-socket-client";
+import { PlayingTime } from "./PlayingTime";
 
 export const PlayerView: React.FC<{ player: Player }> = ({ player }) => {
     let name = player.name;
@@ -50,7 +50,7 @@ export const PlayerView: React.FC<{ player: Player }> = ({ player }) => {
                     {player.name}
                 </span>
                 <span style={{ color: "#555", fontSize: "0.6em" }}>{player.uuid}</span>
-                <span style={{ color: "#555", fontSize: "0.8em" }}>{useTimeDistanceString(new Date(player.lastLogin))}</span>
+                <PlayingTime player={player} />
             </div>
         </div>
     );

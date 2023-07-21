@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 const ENDPOINT: string = "wss://mc.mkihr-ojisan.com/api/ws";
 
-export type MkojServerWebSocketEvent = "player_join" | "player_quit";
+export type MkojServerWebSocketEvent = "player_join" | "player_quit" | "player_update";
 export type MkojServerWebSocketService = "players";
 
 export class MkojServerWebSocketClient {
@@ -13,6 +13,7 @@ export class MkojServerWebSocketClient {
     private static event_services: Record<MkojServerWebSocketEvent, MkojServerWebSocketService> = {
         player_join: "players",
         player_quit: "players",
+        player_update: "players",
     };
 
     private static instance: MkojServerWebSocketClient | null = null;
@@ -31,15 +32,18 @@ export class MkojServerWebSocketClient {
         };
         this.socket.onmessage = (event) => {
             const data = JSON.parse(event.data);
-            switch (data.type) {
+            switch (data.type as MkojServerWebSocketEvent) {
                 case "player_join":
                     this.listeners.get("player_join")?.forEach((listener) => listener(new PlayerJoinEvent(data.player)));
                     break;
                 case "player_quit":
                     this.listeners.get("player_quit")?.forEach((listener) => listener(new PlayerQuitEvent(data.player)));
                     break;
+                case "player_update":
+                    this.listeners.get("player_update")?.forEach((listener) => listener(new PlayerUpdateEvent(data.player)));
+                    break;
                 default:
-                    console.warn("Unknown event type", data);
+                    console.error("Unknown event type", data);
                     break;
             }
         };
@@ -80,7 +84,8 @@ export class MkojServerWebSocketClient {
 
     addEventListener(type: "player_join", callback: (event: PlayerJoinEvent) => void): void;
     addEventListener(type: "player_quit", callback: (event: PlayerQuitEvent) => void): void;
-    addEventListener(type: MkojServerWebSocketEvent, callback: (event: PlayerJoinEvent | PlayerQuitEvent) => void): void {
+    addEventListener(type: "player_update", callback: (event: PlayerUpdateEvent) => void): void;
+    addEventListener(type: MkojServerWebSocketEvent, callback: (event: PlayerJoinEvent | PlayerQuitEvent | PlayerUpdateEvent) => void): void {
         let needSyncServices = false;
 
         if (!this.listeners.has(type)) {
@@ -96,7 +101,8 @@ export class MkojServerWebSocketClient {
 
     removeEventListener(type: "player_join", callback: (event: PlayerJoinEvent) => void): void;
     removeEventListener(type: "player_quit", callback: (event: PlayerQuitEvent) => void): void;
-    removeEventListener(type: MkojServerWebSocketEvent, callback: (event: PlayerJoinEvent | PlayerQuitEvent) => void): void {
+    removeEventListener(type: "player_update", callback: (event: PlayerUpdateEvent) => void): void;
+    removeEventListener(type: MkojServerWebSocketEvent, callback: (event: PlayerJoinEvent | PlayerQuitEvent | PlayerUpdateEvent) => void): void {
         if (!this.listeners.has(type)) {
             return;
         }
@@ -127,6 +133,12 @@ export class PlayerQuitEvent extends Event {
     }
 }
 
+export class PlayerUpdateEvent extends Event {
+    constructor(public readonly player: Player) {
+        super("player_update");
+    }
+}
+
 export function usePlayers(): Player[] {
     const [players, setPlayers] = useState<Player[]>([]);
     useEffect(() => {
@@ -143,11 +155,19 @@ export function usePlayers(): Player[] {
             }
             setPlayers((players) => players.filter((player) => player.uuid !== event.player.uuid));
         };
+        const updateListener = (event: Event) => {
+            if (!(event instanceof PlayerUpdateEvent)) {
+                throw new Error("Invalid event type");
+            }
+            setPlayers((players) => players.map((player) => (player.uuid === event.player.uuid ? event.player : player)));
+        };
         client.addEventListener("player_join", joinListener);
         client.addEventListener("player_quit", quitListener);
+        client.addEventListener("player_update", updateListener);
         return () => {
             client.removeEventListener("player_join", joinListener);
             client.removeEventListener("player_quit", quitListener);
+            client.removeEventListener("player_update", updateListener);
         };
     }, []);
 

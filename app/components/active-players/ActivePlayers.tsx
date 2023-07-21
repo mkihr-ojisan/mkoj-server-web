@@ -1,6 +1,6 @@
 "use client";
 
-import { usePlayers } from "../common/web-socket-client";
+import { usePlayers } from "../../common/web-socket-client";
 import { PlayerView } from "./PlayerView";
 
 export const ActivePlayers: React.FC = () => {
