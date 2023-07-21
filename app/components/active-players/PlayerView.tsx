@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Player } from "../../common/web-socket-client";
 import { PlayingTime } from "./PlayingTime";
+import { Health } from "./Health";
 
 export const PlayerView: React.FC<{ player: Player }> = ({ player }) => {
     let name = player.name;
@@ -50,7 +51,12 @@ export const PlayerView: React.FC<{ player: Player }> = ({ player }) => {
                     {player.name}
                 </span>
                 <span style={{ color: "#555", fontSize: "0.6em" }}>{player.uuid}</span>
-                <PlayingTime player={player} />
+                <span style={{ color: "#555", fontSize: "0.6em", gap: "8px" }}>
+                    <PlayingTime player={player} />
+                </span>
+                <span style={{ color: "#555", fontSize: "0.6em" }}>
+                    <Health health={player.health} maxHealth={player.maxHealth} />
+                </span>
             </div>
         </div>
     );

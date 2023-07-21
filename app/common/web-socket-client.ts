@@ -117,8 +117,13 @@ export class MkojServerWebSocketClient {
 export type Player = {
     name: string;
     uuid: string;
-    type: "java" | "bedrock";
     lastLogin: number;
+    type: "java" | "bedrock";
+    afk: boolean;
+    health: number;
+    maxHealth: number;
+    armor: number;
+    food: number;
 };
 
 export class PlayerJoinEvent extends Event {
