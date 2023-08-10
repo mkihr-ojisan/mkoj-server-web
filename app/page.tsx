@@ -13,6 +13,8 @@ export default function Home() {
             <a href="/maps/">地図</a>
             <br />
             <a href="https://www.chunkbase.com/apps/seed-map#1955612939381403100">Seed Map</a>
+            <br />
+            <a href="/bluemap/">BlueMap</a>
             <h3>参加プレイヤー</h3>
             <ActivePlayers />
             <h2>主なコマンド</h2>
