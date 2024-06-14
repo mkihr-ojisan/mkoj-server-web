@@ -5,16 +5,15 @@ export default function Home() {
     return (
         <main>
             <h1>むかおじサーバー</h1>
-            バージョン: Java Edition 1.20.1(推奨), Java Edition 1.8.x-1.20.1, Bedrock Edition 1.19.80-1.20.10
+            バージョン: Java Edition 1.20.6(推奨), Java Edition 1.8.x-1.20.6, Bedrock Edition 1.20.80-1.21.0
             <br />
             アドレス: mc.mkihr-ojisan.com <CopyServerAddressButton />
             <br />
             <br />
-            <a href="/maps/">地図</a>
+            <a href="/bluemap/">地図</a>
             <br />
             <a href="https://www.chunkbase.com/apps/seed-map#1955612939381403100">Seed Map</a>
             <br />
-            <a href="/bluemap/">BlueMap</a>
             <h3>参加プレイヤー</h3>
             <ActivePlayers />
             <h2>主なコマンド</h2>
@@ -27,20 +26,6 @@ export default function Home() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>/dmarker add &lt;名前&gt;</td>
-                        <td>現在地に指定した名前のマーカーを追加する。マーカーは地図上に表示される。</td>
-                        <td>
-                            <a href="https://www.spigotmc.org/resources/dynmap%C2%AE.274/">Dynmap</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>/dynmap updaterender</td>
-                        <td>現在地付近の地図を再描画します。</td>
-                        <td>
-                            <a href="https://www.spigotmc.org/resources/dynmap%C2%AE.274/">Dynmap</a>
-                        </td>
-                    </tr>
                     <tr>
                         <td>/invite &lt;ID&gt;</td>
                         <td>指定したアカウントをホワイトリストに追加する。Java・Bedrock両対応。スペースは%20に置き換えて入力する。</td>
@@ -75,10 +60,6 @@ export default function Home() {
                 </tbody>
             </table>
             <h2>プラグインの機能</h2>
-            <h3>Dynmap</h3>
-            <ul>
-                <li>看板を立てて一行目を&quot;[dynmap]&quot;にすると、地図上にマーカーが追加されます。</li>
-            </ul>
             <h3>BlockLocker</h3>
             <ul>
                 <li>
@@ -92,6 +73,9 @@ export default function Home() {
                     <a href="https://www.spigotmc.org/resources/blocklocker.3268/">BlockLocker</a> - チェストとかをロックできるやつ
                 </li>
                 <li>
+                    <a href="https://bluemap.bluecolored.de/">BlueMap</a> - 地図が見れるやつ
+                </li>
+                <li>
                     <a href="https://www.spigotmc.org/resources/chunkloader.92834/">ChunkLoader</a> - チャンクローダー
                 </li>
                 <li>
@@ -99,9 +83,6 @@ export default function Home() {
                 </li>
                 <li>
                     <a href="https://www.spigotmc.org/resources/drivebackupv2.79519/">DriveBackupV2</a> - バックアップするやつ
-                </li>
-                <li>
-                    <a href="https://www.spigotmc.org/resources/dynmap%C2%AE.274/">Dynmap</a> - 地図が見れるやつ
                 </li>
                 <li>
                     <a href="https://essentialsx.net/">EssentialsX</a> - よくわからんけど便利そうなやつ
@@ -127,6 +108,11 @@ export default function Home() {
                 </li>
                 <li>
                     <a href="https://github.com/mkihr-ojisan/mkoj-server-plugin">mkoj-server-plugin</a> - うにょ
+                </li>
+                <li>
+                    <a href="https://dev.bukkit.org/projects/multiverse-core">Multiverse-Core</a>,{" "}
+                    <a href="https://dev.bukkit.org/projects/multiverse-portals/">Multiverse-Portals</a>,{" "}
+                    <a href="https://dev.bukkit.org/projects/multiverse-inventories/">Multiverse-Inventories</a> - ワールドを増やせるやつ
                 </li>
             </ul>
         </main>
