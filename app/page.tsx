@@ -1,4 +1,5 @@
 import { ActivePlayers } from "./components/active-players/ActivePlayers";
+import { Chat } from "./components/chat/Chat";
 import { CopyServerAddressButton } from "./components/CopyServerAddressButton";
 
 export default function Home() {
@@ -16,6 +17,8 @@ export default function Home() {
             <br />
             <h3>参加プレイヤー</h3>
             <ActivePlayers />
+            <h3>チャット</h3>
+            <Chat />
             <h2>主なコマンド</h2>
             <table border={1}>
                 <thead>

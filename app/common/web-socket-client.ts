@@ -2,18 +2,20 @@ import { useEffect, useState } from "react";
 
 const ENDPOINT: string = "wss://mc.mkihr-ojisan.com/api/ws";
 
-export type MkojServerWebSocketEvent = "player_join" | "player_quit" | "player_update";
-export type MkojServerWebSocketService = "players";
+export type MkojServerWebSocketEvent = "player_join" | "player_quit" | "player_update" | "chat" | "pong";
+export type MkojServerWebSocketService = "players" | "chat";
 
 export class MkojServerWebSocketClient {
-    private socket: WebSocket;
-    private listeners: Map<MkojServerWebSocketEvent, ((event: PlayerJoinEvent | PlayerQuitEvent) => void)[]> = new Map();
+    private socket: WebSocket | null = null;
+    private listeners: Map<MkojServerWebSocketEvent, ((event: any) => void)[]> = new Map();
     private subscribingServices: MkojServerWebSocketService[] = [];
 
     private static event_services: Record<MkojServerWebSocketEvent, MkojServerWebSocketService> = {
         player_join: "players",
         player_quit: "players",
         player_update: "players",
+        chat: "chat",
+        pong: undefined as never,
     };
 
     private static instance: MkojServerWebSocketClient | null = null;
@@ -26,6 +28,10 @@ export class MkojServerWebSocketClient {
     }
 
     constructor() {
+        this.initSocket();
+    }
+
+    private initSocket() {
         this.socket = new WebSocket(ENDPOINT);
         this.socket.onopen = () => {
             this.syncServices();
@@ -42,19 +48,30 @@ export class MkojServerWebSocketClient {
                 case "player_update":
                     this.listeners.get("player_update")?.forEach((listener) => listener(new PlayerUpdateEvent(data.player)));
                     break;
+                case "chat":
+                    this.listeners.get("chat")?.forEach((listener) => listener(new ChatEvent(data.data)));
+                    break;
+                case "pong":
+                    break;
                 default:
                     console.error("Unknown event type", data);
                     break;
             }
         };
+
+        setInterval(() => {
+            if (this.socket!.readyState === WebSocket.OPEN) {
+                this.send({ type: "ping" });
+            }
+        }, 10000);
     }
 
     private send(data: any) {
-        this.socket.send(JSON.stringify(data));
+        this.socket!.send(JSON.stringify(data));
     }
 
     private syncServices() {
-        if (this.socket.readyState !== WebSocket.OPEN) {
+        if (this.socket!.readyState !== WebSocket.OPEN) {
             return;
         }
 
@@ -79,13 +96,14 @@ export class MkojServerWebSocketClient {
     }
 
     close() {
-        this.socket.close();
+        this.socket!.close();
     }
 
     addEventListener(type: "player_join", callback: (event: PlayerJoinEvent) => void): void;
     addEventListener(type: "player_quit", callback: (event: PlayerQuitEvent) => void): void;
     addEventListener(type: "player_update", callback: (event: PlayerUpdateEvent) => void): void;
-    addEventListener(type: MkojServerWebSocketEvent, callback: (event: PlayerJoinEvent | PlayerQuitEvent | PlayerUpdateEvent) => void): void {
+    addEventListener(type: "chat", callback: (event: ChatEvent) => void): void;
+    addEventListener(type: MkojServerWebSocketEvent, callback: (event: any) => void): void {
         let needSyncServices = false;
 
         if (!this.listeners.has(type)) {
@@ -102,7 +120,8 @@ export class MkojServerWebSocketClient {
     removeEventListener(type: "player_join", callback: (event: PlayerJoinEvent) => void): void;
     removeEventListener(type: "player_quit", callback: (event: PlayerQuitEvent) => void): void;
     removeEventListener(type: "player_update", callback: (event: PlayerUpdateEvent) => void): void;
-    removeEventListener(type: MkojServerWebSocketEvent, callback: (event: PlayerJoinEvent | PlayerQuitEvent | PlayerUpdateEvent) => void): void {
+    removeEventListener(type: "chat", callback: (event: ChatEvent) => void): void;
+    removeEventListener(type: MkojServerWebSocketEvent, callback: (event: any) => void): void {
         if (!this.listeners.has(type)) {
             return;
         }
@@ -111,6 +130,13 @@ export class MkojServerWebSocketClient {
             this.listeners.delete(type);
             this.syncServices();
         }
+    }
+
+    say(message: string) {
+        this.send({
+            type: "say",
+            message,
+        });
     }
 }
 
@@ -141,6 +167,23 @@ export class PlayerQuitEvent extends Event {
 export class PlayerUpdateEvent extends Event {
     constructor(public readonly player: Player) {
         super("player_update");
+    }
+}
+
+export type ChatHistoryEntry = {
+    type: "MESSAGE" | "PLAYER_JOIN" | "PLAYER_QUIT";
+    sender: {
+        type: "PLAYER" | "WEB";
+        name: string | null;
+        uuid: string | null;
+    } | null;
+    message: string | null;
+    timestamp: number;
+};
+
+export class ChatEvent extends Event {
+    constructor(public readonly data: ChatHistoryEntry) {
+        super("chat");
     }
 }
 
@@ -177,4 +220,23 @@ export function usePlayers(): Player[] {
     }, []);
 
     return players;
+}
+
+export function useChatHistory(): ChatHistoryEntry[] {
+    const [history, setHistory] = useState<ChatHistoryEntry[]>([]);
+    useEffect(() => {
+        const client = MkojServerWebSocketClient.getInstance();
+        const chatListener = (event: Event) => {
+            if (!(event instanceof ChatEvent)) {
+                throw new Error("Invalid event type");
+            }
+            setHistory((history) => [...history, event.data]);
+        };
+        client.addEventListener("chat", chatListener);
+        return () => {
+            client.removeEventListener("chat", chatListener);
+        };
+    }, []);
+
+    return history;
 }
