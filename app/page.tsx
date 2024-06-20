@@ -6,7 +6,7 @@ export default function Home() {
     return (
         <main>
             <h1>むかおじサーバー</h1>
-            バージョン: Java Edition 1.20.6(推奨), Java Edition 1.8.x-1.20.6, Bedrock Edition 1.20.80-1.21.0
+            バージョン: Java Edition 1.20.6(推奨), Java Edition 1.8.x-1.21, Bedrock Edition 1.20.80-1.21.0
             <br />
             アドレス: mc.mkihr-ojisan.com <CopyServerAddressButton />
             <br />
@@ -31,7 +31,7 @@ export default function Home() {
                 <tbody>
                     <tr>
                         <td>/invite &lt;ID&gt;</td>
-                        <td>指定したアカウントをホワイトリストに追加する。Java・Bedrock両対応。スペースは%20に置き換えて入力する。</td>
+                        <td>指定したアカウントをホワイトリストに追加する。</td>
                         <td>
                             <a href="https://github.com/mkihr-ojisan/mkoj-server-plugin">mkoj-server-plugin</a>
                         </td>
@@ -116,6 +116,9 @@ export default function Home() {
                     <a href="https://dev.bukkit.org/projects/multiverse-core">Multiverse-Core</a>,{" "}
                     <a href="https://dev.bukkit.org/projects/multiverse-portals/">Multiverse-Portals</a>,{" "}
                     <a href="https://dev.bukkit.org/projects/multiverse-inventories/">Multiverse-Inventories</a> - ワールドを増やせるやつ
+                </li>
+                <li>
+                    <a href="https://www.spigotmc.org/resources/spark.57242/">Spark</a> - プロファイラー
                 </li>
             </ul>
         </main>
