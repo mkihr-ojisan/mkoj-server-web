@@ -18,7 +18,7 @@ export const ChatHistory: React.FC = () => {
             style={{
                 display: "flex",
                 flexDirection: "column",
-                overflow: "scroll-y",
+                overflowY: "scroll",
                 padding: 4,
                 height: 200,
             }}
