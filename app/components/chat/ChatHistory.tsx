@@ -34,6 +34,8 @@ export const ChatHistory: React.FC = () => {
 const Entry: React.FC<{ entry: ChatHistoryEntry }> = ({ entry }) => {
     return (
         <div style={{ display: "flex", alignItems: "center" }}>
+            {entry.type === "SERVER_START" && <span style={{ color: "gray" }}>サーバー起動</span>}
+
             {entry.type === "MESSAGE" && (
                 <>
                     {entry.sender && (
