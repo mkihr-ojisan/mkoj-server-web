@@ -51,13 +51,22 @@ export default function Home() {
                     <tr>
                         <td>/tps</td>
                         <td>サーバーのTPSを表示する。20未満になっていると処理落ちしている。</td>
-                        <td>-</td>
+                        <td>
+                            <a href="https://www.spigotmc.org/resources/spark.57242/">Spark</a>
+                        </td>
                     </tr>
                     <tr>
                         <td>/unyo</td>
                         <td>うにょーん</td>
                         <td>
                             <a href="https://github.com/mkihr-ojisan/mkoj-server-plugin">mkoj-server-plugin</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>/bmarker create</td>
+                        <td>地図上にマーカーを追加する</td>
+                        <td>
+                            <a href="https://github.com/MiraculixxT/bluemap-marker">BlueMap Marker Manager</a>
                         </td>
                     </tr>
                 </tbody>
@@ -76,7 +85,8 @@ export default function Home() {
                     <a href="https://www.spigotmc.org/resources/blocklocker.3268/">BlockLocker</a> - チェストとかをロックできるやつ
                 </li>
                 <li>
-                    <a href="https://bluemap.bluecolored.de/">BlueMap</a> - 地図が見れるやつ
+                    <a href="https://bluemap.bluecolored.de/">BlueMap</a>,{" "}
+                    <a href="https://github.com/MiraculixxT/bluemap-marker">BlueMap Marker Manager</a> - 地図が見れるやつ
                 </li>
                 <li>
                     <a href="https://www.spigotmc.org/resources/chunkloader.92834/">ChunkLoader</a> - チャンクローダー
