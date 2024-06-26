@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Player } from "../../common/web-socket-client";
 import { PlayingTime } from "./PlayingTime";
 import { Health } from "./Health";
+import { PlayerHead } from "../PlayerHead";
 
 export const PlayerView: React.FC<{ player: Player }> = ({ player }) => {
     let name = player.name;
@@ -20,13 +21,7 @@ export const PlayerView: React.FC<{ player: Player }> = ({ player }) => {
                 padding: "8px",
             }}
         >
-            <Image
-                src={`https://api.tydiumcraft.net/v1/players/skin?uuid=${player.uuid}&type=avatar&size=64`}
-                referrerPolicy="no-referrer"
-                width={64}
-                height={64}
-                alt={name}
-            />
+            <PlayerHead width={64} height={64} alt={name} uuid={player.uuid} />
             <div style={{ display: "flex", flexDirection: "column" }}>
                 <span>
                     {player.type === "java" ? (

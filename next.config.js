@@ -4,7 +4,7 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: "https",
-                hostname: "api.tydiumcraft.net",
+                hostname: "mc-heads.net",
             },
         ],
     },

@@ -1,6 +1,6 @@
 import { ChatHistoryEntry, useChatHistory } from "@/app/common/web-socket-client";
-import Image from "next/image";
 import { useEffect, useRef } from "react";
+import { PlayerHead } from "../PlayerHead";
 
 export const ChatHistory: React.FC = () => {
     const chatHistory = useChatHistory();
@@ -43,12 +43,7 @@ const Entry: React.FC<{ entry: ChatHistoryEntry }> = ({ entry }) => {
                             {entry.sender.type === "PLAYER" && entry.sender.uuid && (
                                 <>
                                     &lt;
-                                    <Image
-                                        src={`https://api.tydiumcraft.net/v1/players/skin?uuid=${entry.sender.uuid}&type=avatar&size=16`}
-                                        alt={entry.sender.name ?? "Unknown"}
-                                        width={16}
-                                        height={16}
-                                    />
+                                    <PlayerHead uuid={entry.sender.uuid} width={16} height={16} alt={entry.sender.name ?? "Unknown"} />
                                     <span>{entry.sender.name ?? "Unknown"}</span>
                                     &gt;
                                 </>
@@ -63,12 +58,8 @@ const Entry: React.FC<{ entry: ChatHistoryEntry }> = ({ entry }) => {
                 <span style={{ color: "#aaaa00" }}>
                     {entry.sender && entry.sender.type === "PLAYER" && entry.sender.uuid && (
                         <>
-                            <Image
-                                src={`https://api.tydiumcraft.net/v1/players/skin?uuid=${entry.sender.uuid}&type=avatar&size=16`}
-                                alt={entry.sender.name ?? "Unknown"}
-                                width={16}
-                                height={16}
-                            />
+                            <PlayerHead uuid={entry.sender.uuid} width={16} height={16} alt={entry.sender.name ?? "Unknown"} />
+
                             <span>{entry.sender.name ?? "Unknown"} がゲームに参加しました</span>
                         </>
                     )}
@@ -78,12 +69,7 @@ const Entry: React.FC<{ entry: ChatHistoryEntry }> = ({ entry }) => {
                 <span style={{ color: "#aaaa00" }}>
                     {entry.sender && entry.sender.type === "PLAYER" && entry.sender.uuid && (
                         <>
-                            <Image
-                                src={`https://api.tydiumcraft.net/v1/players/skin?uuid=${entry.sender.uuid}&type=avatar&size=16`}
-                                alt={entry.sender.name ?? "Unknown"}
-                                width={16}
-                                height={16}
-                            />
+                            <PlayerHead uuid={entry.sender.uuid} width={16} height={16} alt={entry.sender.name ?? "Unknown"} />
                             <span>{entry.sender.name ?? "Unknown"} がゲームを退出しました</span>
                         </>
                     )}
@@ -93,12 +79,7 @@ const Entry: React.FC<{ entry: ChatHistoryEntry }> = ({ entry }) => {
                 <span>
                     {entry.sender && entry.sender.type === "PLAYER" && entry.sender.uuid && (
                         <>
-                            <Image
-                                src={`https://api.tydiumcraft.net/v1/players/skin?uuid=${entry.sender.uuid}&type=avatar&size=16`}
-                                alt={entry.sender.name ?? "Unknown"}
-                                width={16}
-                                height={16}
-                            />
+                            <PlayerHead uuid={entry.sender.uuid} width={16} height={16} alt={entry.sender.name ?? "Unknown"} />
                             <>
                                 {entry.sender.name ?? "Unknown"} が
                                 {entry.advancement.type === "CHALLENGE" ? "挑戦" : entry.advancement.type === "GOAL" ? "目標" : "進捗"}
