@@ -1,12 +1,13 @@
 import { ActivePlayers } from "./components/active-players/ActivePlayers";
 import { Chat } from "./components/chat/Chat";
 import { CopyServerAddressButton } from "./components/CopyServerAddressButton";
+import { SupportedVersion } from "./components/SupportedVersion";
 
 export default function Home() {
     return (
         <main>
             <h1>むかおじサーバー</h1>
-            バージョン: Java Edition 1.20.6(推奨), Java Edition 1.8.x-1.21, Bedrock Edition 1.20.80-1.21.0
+            バージョン: <SupportedVersion />
             <br />
             アドレス: mc.mkihr-ojisan.com <CopyServerAddressButton />
             <br />

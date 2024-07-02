@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { QueryClientProvider } from "./common/queryClient";
 
 export const metadata: Metadata = {
     title: "mkoj server",
@@ -7,7 +8,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="ja">
-            <body>{children}</body>
+            <body>
+                <QueryClientProvider>{children}</QueryClientProvider>
+            </body>
         </html>
     );
 }
