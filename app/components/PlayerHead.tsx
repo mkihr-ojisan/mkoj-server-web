@@ -1,6 +1,6 @@
-import Image, { ImageProps } from "next/image";
+import { ImgHTMLAttributes } from "react";
 
-export const PlayerHead: React.FC<Omit<ImageProps, "src"> & { uuid: string }> = ({ uuid, ...props }) => {
-    // eslint-disable-next-line jsx-a11y/alt-text
-    return <Image {...props} src={`https://mc-heads.net/avatar/${uuid}`} referrerPolicy="no-referrer" />;
+export const PlayerHead: React.FC<Omit<ImgHTMLAttributes<HTMLImageElement>, "src"> & { uuid: string }> = ({ uuid, ...props }) => {
+    // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
+    return <img {...props} src={`https://mc-heads.net/avatar/${uuid}`} referrerPolicy="no-referrer" style={{ imageRendering: "pixelated" }} />;
 };
