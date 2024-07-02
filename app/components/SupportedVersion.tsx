@@ -9,10 +9,16 @@ type ServerInfo = {
 };
 
 export const SupportedVersion: React.FC = () => {
-    const serverInfo = useQuery<ServerInfo>("server-info", async () => {
-        const res = await fetch("/api/server-info");
-        return res.json();
-    });
+    const serverInfo = useQuery<ServerInfo>(
+        "server-info",
+        async () => {
+            const res = await fetch("/api/server-info");
+            return res.json();
+        },
+        {
+            refetchOnWindowFocus: false,
+        }
+    );
 
     return (
         <>
