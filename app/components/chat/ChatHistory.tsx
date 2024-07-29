@@ -1,6 +1,7 @@
 import { ChatHistoryEntry, useChatHistory } from "@/app/common/web-socket-client";
 import { useEffect, useRef } from "react";
 import { PlayerHead } from "../PlayerHead";
+import { ChatComponent } from "./ChatComponent";
 
 export const ChatHistory: React.FC = () => {
     const chatHistory = useChatHistory();
@@ -92,6 +93,7 @@ const Entry: React.FC<{ entry: ChatHistoryEntry }> = ({ entry }) => {
                     )}
                 </span>
             )}
+            {entry.type === "PLAYER_DEATH" && entry.message && <ChatComponent component={JSON.parse(entry.message)} />}
 
             <span style={{ flexGrow: 1 }} />
             <span style={{ color: "#888", fontSize: "0.8em", flexShrink: 0 }}>{new Date(entry.timestamp).toLocaleString()}</span>

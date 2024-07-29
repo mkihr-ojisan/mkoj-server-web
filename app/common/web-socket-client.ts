@@ -171,7 +171,7 @@ export class PlayerUpdateEvent extends Event {
 }
 
 export type ChatHistoryEntry = {
-    type: "MESSAGE" | "PLAYER_JOIN" | "PLAYER_QUIT" | "PLAYER_ADVANCEMENT_DONE" | "SERVER_START";
+    type: "MESSAGE" | "PLAYER_JOIN" | "PLAYER_QUIT" | "PLAYER_ADVANCEMENT_DONE" | "SERVER_START" | "PLAYER_DEATH";
     sender: {
         type: "PLAYER" | "WEB";
         name: string | null;
