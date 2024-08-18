@@ -43,7 +43,10 @@ export const PlayerView: React.FC<{ player: Player }> = ({ player }) => {
                             style={{ width: "1.4em", height: "1.4em", verticalAlign: "text-bottom", marginRight: "4px" }}
                         />
                     )}
-                    <span style={{ color: player.afk ? "#555" : undefined }}>{player.name}</span>
+                    <span style={{ color: player.afk ? "#555" : undefined }}>
+                        {player.afk && "[AFK] "}
+                        {player.name}
+                    </span>
                 </span>
                 <span style={{ color: "#555", fontSize: "0.6em" }}>{player.uuid}</span>
                 <span style={{ color: "#555", fontSize: "0.6em", gap: "8px" }}>

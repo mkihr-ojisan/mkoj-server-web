@@ -2,6 +2,7 @@ import { ActivePlayers } from "./components/active-players/ActivePlayers";
 import { Chat } from "./components/chat/Chat";
 import { CopyServerAddressButton } from "./components/CopyServerAddressButton";
 import { SupportedVersion } from "./components/SupportedVersion";
+import { TpsMonitor } from "./components/tps-monitor/TpsMonitor";
 
 export default function Home() {
     return (
@@ -20,6 +21,8 @@ export default function Home() {
             <ActivePlayers />
             <h3>チャット</h3>
             <Chat />
+            <h3>TPS</h3>
+            <TpsMonitor />
             <h2>主なコマンド</h2>
             <table border={1}>
                 <thead>
@@ -74,12 +77,13 @@ export default function Home() {
             </table>
             <h2>プラグインの機能</h2>
             <h3>BlockLocker</h3>
-            <ul>
-                <li>
-                    看板を設置することでチェスト、ドア等を保護できます。
-                    <a href="https://www.spigotmc.org/resources/blocklocker.3268/field?field=documentation">使い方</a>
-                </li>
-            </ul>
+            <p>
+                看板を設置することでチェスト、ドア等を保護できます。
+                <a href="https://www.spigotmc.org/resources/blocklocker.3268/field?field=documentation">使い方</a>
+            </p>
+            <h3>Minecart Speed Plus</h3>
+            <p>パワードレールの横か下に看板を設置することでトロッコの速さを0〜50倍にできます。曲がるときは減速しないといけないらしい。</p>
+            <p>看板の1行目は「[msp]」、2行目には倍率を書く。</p>
             <h2>導入プラグイン</h2>
             <ul>
                 <li>
@@ -107,6 +111,9 @@ export default function Home() {
                 </li>
                 <li>
                     <a href="https://luckperms.net/">LuckPerms</a> - 権限を管理するやつ
+                </li>
+                <li>
+                    <a href="https://www.spigotmc.org/resources/minecart-speed-plus.69639/">Minecart Speed Plus - トロッコの速さを変えられるやつ</a>
                 </li>
                 <li>
                     <a href="https://www.spigotmc.org/resources/protocollib.1997/">ProtocolLib</a> - 前提プラグイン的なやつ
