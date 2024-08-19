@@ -1,6 +1,7 @@
 import { ActivePlayers } from "./components/active-players/ActivePlayers";
 import { Chat } from "./components/chat/Chat";
 import { CopyServerAddressButton } from "./components/CopyServerAddressButton";
+import { MsptMonitor } from "./components/mspt-monitor/MsptMonitor";
 import { SupportedVersion } from "./components/SupportedVersion";
 import { TpsMonitor } from "./components/tps-monitor/TpsMonitor";
 
@@ -23,6 +24,8 @@ export default function Home() {
             <Chat />
             <h3>TPS</h3>
             <TpsMonitor />
+            <h3>MSPT</h3>
+            <MsptMonitor />
             <h2>主なコマンド</h2>
             <table border={1}>
                 <thead>

@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 
 const ENDPOINT: string = "wss://mc.mkihr-ojisan.com/api/ws";
 
-export type MkojServerWebSocketEvent = "player_join" | "player_quit" | "player_update" | "chat" | "pong" | "tps5s";
-export type MkojServerWebSocketService = "players" | "chat" | "tps5s";
+export type MkojServerWebSocketEvent = "player_join" | "player_quit" | "player_update" | "chat" | "pong" | "tps5s" | "mspt5s";
+export type MkojServerWebSocketService = "players" | "chat" | "tps5s" | "mspt5s";
 
 export class MkojServerWebSocketClient {
     private socket: WebSocket | null = null;
@@ -17,6 +17,7 @@ export class MkojServerWebSocketClient {
         chat: "chat",
         pong: undefined as never,
         tps5s: "tps5s",
+        mspt5s: "mspt5s",
     };
 
     private static instance: MkojServerWebSocketClient | null = null;
@@ -56,6 +57,9 @@ export class MkojServerWebSocketClient {
                     break;
                 case "tps5s":
                     this.listeners.get("tps5s")?.forEach((listener) => listener(new Tps5sEvent(data.tps)));
+                    break;
+                case "mspt5s":
+                    this.listeners.get("mspt5s")?.forEach((listener) => listener(new Mspt5sEvent(data.mspt)));
                     break;
                 default:
                     console.error("Unknown event type", data);
@@ -108,6 +112,7 @@ export class MkojServerWebSocketClient {
     addEventListener(type: "player_update", callback: (event: PlayerUpdateEvent) => void): void;
     addEventListener(type: "chat", callback: (event: ChatEvent) => void): void;
     addEventListener(type: "tps5s", callback: (event: Tps5sEvent) => void): void;
+    addEventListener(type: "mspt5s", callback: (event: Mspt5sEvent) => void): void;
     addEventListener(type: MkojServerWebSocketEvent, callback: (event: any) => void): void {
         let needSyncServices = false;
 
@@ -127,6 +132,7 @@ export class MkojServerWebSocketClient {
     removeEventListener(type: "player_update", callback: (event: PlayerUpdateEvent) => void): void;
     removeEventListener(type: "chat", callback: (event: ChatEvent) => void): void;
     removeEventListener(type: "tps5s", callback: (event: Tps5sEvent) => void): void;
+    removeEventListener(type: "mspt5s", callback: (event: Mspt5sEvent) => void): void;
     removeEventListener(type: MkojServerWebSocketEvent, callback: (event: any) => void): void {
         if (!this.listeners.has(type)) {
             return;
@@ -200,6 +206,12 @@ export class ChatEvent extends Event {
 export class Tps5sEvent extends Event {
     constructor(public readonly tps: number) {
         super("tps5s");
+    }
+}
+
+export class Mspt5sEvent extends Event {
+    constructor(public readonly mspt: number) {
+        super("mspt5s");
     }
 }
 
@@ -282,4 +294,31 @@ export function useTpsHistory(): { tps: number; timestamp: number }[] {
     }, []);
 
     return tpsHistory;
+}
+
+export function useMsptHistory(): { mspt: number; timestamp: number }[] {
+    const [msptHistory, setMsptHistory] = useState<{ mspt: number; timestamp: number }[]>([]);
+    useEffect(() => {
+        const client = MkojServerWebSocketClient.getInstance();
+        const msptListener = (event: Event) => {
+            if (!(event instanceof Mspt5sEvent)) {
+                throw new Error("Invalid event type");
+            }
+            setMsptHistory((msptHistory) =>
+                [
+                    ...msptHistory,
+                    {
+                        mspt: event.mspt,
+                        timestamp: Date.now(),
+                    },
+                ].slice(-100)
+            );
+        };
+        client.addEventListener("mspt5s", msptListener);
+        return () => {
+            client.removeEventListener("mspt5s", msptListener);
+        };
+    }, []);
+
+    return msptHistory;
 }
