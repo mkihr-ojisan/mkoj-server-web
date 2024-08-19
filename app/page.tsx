@@ -22,9 +22,9 @@ export default function Home() {
             <ActivePlayers />
             <h3>チャット</h3>
             <Chat />
-            <h3>TPS</h3>
+            <h3>負荷</h3>
             <TpsMonitor />
-            <h3>MSPT</h3>
+            <div style={{ height: "16px" }} />
             <MsptMonitor />
             <h2>主なコマンド</h2>
             <table border={1}>
