@@ -116,7 +116,7 @@ export default function Home() {
                     <a href="https://luckperms.net/">LuckPerms</a> - 権限を管理するやつ
                 </li>
                 <li>
-                    <a href="https://www.spigotmc.org/resources/minecart-speed-plus.69639/">Minecart Speed Plus - トロッコの速さを変えられるやつ</a>
+                    <a href="https://www.spigotmc.org/resources/minecart-speed-plus.69639/">Minecart Speed Plus</a> - トロッコの速さを変えられるやつ
                 </li>
                 <li>
                     <a href="https://www.spigotmc.org/resources/protocollib.1997/">ProtocolLib</a> - 前提プラグイン的なやつ
