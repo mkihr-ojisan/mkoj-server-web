@@ -1,5 +1,5 @@
 import { usePlayerData } from "@/app/common/playerData";
-import React from "react";
+import React, { Fragment } from "react";
 import Modal from "react-modal";
 import ja_jp from "../chat/ja_jp.json";
 
@@ -62,14 +62,27 @@ export const PlayerInfoDialog: React.FC<PlayerInfoDialogProps> = ({ uuid, open, 
                 <dt>プレイヤーがサーバー上で最後に確認された日時</dt>
                 <dd>{data?.lastSeen && new Date(data?.lastSeen).toLocaleString()}</dd>
 
-                <dt>BANされている</dt>
-                <dd>{data?.isBanned ? "はい" : "いいえ"}</dd>
+                {data?.isOnline && (
+                    <>
+                        <dt>位置</dt>
+                        <dd>
+                            {data?.onlinePlayerData.location.world}/{data?.onlinePlayerData.location.x},{data?.onlinePlayerData.location.y},
+                            {data?.onlinePlayerData.location.z}
+                        </dd>
 
-                <dt>ホワイトリストに載っている</dt>
-                <dd>{data?.isWhitelisted ? "はい" : "いいえ"}</dd>
+                        <dt>レベル</dt>
+                        <dd>{data?.onlinePlayerData.level}</dd>
 
-                <dt>OP権限を持っている</dt>
-                <dd>{data?.isOp ? "はい" : "いいえ"}</dd>
+                        <dt>経験値</dt>
+                        <dd>{data?.onlinePlayerData.exp}</dd>
+
+                        <dt>言語</dt>
+                        <dd>{data?.onlinePlayerData.locale}</dd>
+
+                        <dt>Ping</dt>
+                        <dd>{data?.onlinePlayerData.ping}</dd>
+                    </>
+                )}
             </dl>
 
             <details>
@@ -116,6 +129,24 @@ export const PlayerInfoDialog: React.FC<PlayerInfoDialogProps> = ({ uuid, open, 
                     ))}
                 </dl>
             </details>
+
+            {data?.isOnline && (
+                <details>
+                    <summary>進捗</summary>
+                    <dl>
+                        {Object.values(data?.onlinePlayerData.advancements ?? {})
+                            .filter((a) => !!a.display)
+                            .map((a) => {
+                                return (
+                                    <Fragment key={a.name}>
+                                        <dt>{(ja_jp as Record<string, string>)["advancements." + a.name.replace("/", ".") + ".title"] ?? a.name}</dt>
+                                        <dd>{a.isDone ? "達成済み" : "未達成"}</dd>
+                                    </Fragment>
+                                );
+                            })}
+                    </dl>
+                </details>
+            )}
         </Modal>
     );
 };

@@ -46,6 +46,7 @@ export type LocationData = {
 };
 
 export type OnlinePlayerData = {
+    location: LocationData;
     exp: number;
     level: number;
     locale: string;
@@ -65,6 +66,11 @@ export type OnlinePlayerData = {
 
 export type Advancement = {
     name: string;
+    display?: {
+        title: string;
+        displayName: string;
+        description: string;
+    };
     isDone: boolean;
     awardedCriteria: string[];
     remainingCriteria: string[];
