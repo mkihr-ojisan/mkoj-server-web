@@ -58,9 +58,7 @@ export default function Home() {
                     <tr>
                         <td>/tps</td>
                         <td>サーバーのTPSを表示する。20未満になっていると処理落ちしている。</td>
-                        <td>
-                            <a href="https://www.spigotmc.org/resources/spark.57242/">Spark</a>
-                        </td>
+                        <td>-</td>
                     </tr>
                     <tr>
                         <td>/unyo</td>
@@ -95,7 +93,10 @@ export default function Home() {
             <p>パワードレールの横か下に看板を設置することでトロッコの速さを0〜50倍にできます。曲がるときは減速しないといけないらしい。</p>
             <p>看板の1行目は「[msp]」、2行目には倍率を書く。</p>
             <h3>mkoj-server-plugin</h3>
-            <p>白色の羊毛で音符ブロックを右クリックするとミュートします。ミュートしてもアレイは反応します。</p>
+            <p>
+                白色の羊毛で音符ブロックを右クリックするとミュートします。ミュートしてもアレイは反応します。
+                <New />
+            </p>
             <h2>導入プラグイン</h2>
             <ul>
                 <li>
@@ -146,10 +147,11 @@ export default function Home() {
                     <a href="https://dev.bukkit.org/projects/multiverse-portals/">Multiverse-Portals</a>,{" "}
                     <a href="https://dev.bukkit.org/projects/multiverse-inventories/">Multiverse-Inventories</a> - ワールドを増やせるやつ
                 </li>
-                <li>
-                    <a href="https://www.spigotmc.org/resources/spark.57242/">Spark</a> - プロファイラー
-                </li>
             </ul>
         </main>
     );
+}
+
+function New() {
+    return <span style={{ backgroundColor: "red", color: "white", fontSize: "8pt", fontWeight: "bold" }}>NEW!</span>;
 }
