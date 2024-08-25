@@ -76,6 +76,13 @@ export default function Home() {
                             <a href="https://github.com/MiraculixxT/bluemap-marker">BlueMap Marker Manager</a>
                         </td>
                     </tr>
+                    <tr>
+                        <td>/co inspect</td>
+                        <td>ブロックの変更履歴を表示する</td>
+                        <td>
+                            <a href="https://www.spigotmc.org/resources/coreprotect.8631/">CoreProtect</a>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <h2>プラグインの機能</h2>
