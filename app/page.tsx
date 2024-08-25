@@ -94,6 +94,8 @@ export default function Home() {
             <h3>Minecart Speed Plus</h3>
             <p>パワードレールの横か下に看板を設置することでトロッコの速さを0〜50倍にできます。曲がるときは減速しないといけないらしい。</p>
             <p>看板の1行目は「[msp]」、2行目には倍率を書く。</p>
+            <h3>mkoj-server-plugin</h3>
+            <p>白色の羊毛で音符ブロックを右クリックするとミュートします。ミュートしてもアレイは反応します。</p>
             <h2>導入プラグイン</h2>
             <ul>
                 <li>
@@ -134,7 +136,6 @@ export default function Home() {
                 </li>
                 <li>
                     <a href="https://www.spigotmc.org/resources/viabackwards.27448/">ViaBackwards</a>,{" "}
-                    <a href="https://www.spigotmc.org/resources/viarewind.52109/">ViaRewind</a>,{" "}
                     <a href="https://www.spigotmc.org/resources/viaversion.19254/">ViaVersion</a> - バージョンが多少違っても入れるようになるやつ
                 </li>
                 <li>
