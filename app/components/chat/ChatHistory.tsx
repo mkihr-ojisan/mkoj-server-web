@@ -50,7 +50,7 @@ const Entry: React.FC<{ entry: ChatHistoryEntry }> = ({ entry }) => {
                                     &gt;
                                 </>
                             )}
-                            {entry.sender.type === "WEB" && <span>[Web]</span>}
+                            {entry.sender.type === "WEB" && <span>[Web|{entry.sender.name}]</span>}
                             {entry.message && <span style={{ marginLeft: 8 }}>{entry.message}</span>}
                         </>
                     )}
