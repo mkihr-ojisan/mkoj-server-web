@@ -93,10 +93,46 @@ export default function Home() {
             <p>パワードレールの横か下に看板を設置することでトロッコの速さを0〜50倍にできます。曲がるときは減速しないといけないらしい。</p>
             <p>看板の1行目は「[msp]」、2行目には倍率を書く。</p>
             <h3>mkoj-server-plugin</h3>
-            <p>
-                白色の羊毛で音符ブロックを右クリックするとミュートします。ミュートしてもアレイは反応します。
-                <New />
-            </p>
+            <ul>
+                <li style={{ marginBottom: "8px" }}>白色の羊毛で音符ブロックを右クリックするとミュートします。ミュートしてもアレイは反応します。</li>
+                <li>
+                    ピラミッドの構成ブロックを鉄ブロック以外にすることでビーコンの効果範囲が広がります。
+                    <br />
+                    例えば、鉄ブロック81個、金ブロック49個、エメラルドブロック25個、ダイヤモンドブロック8個、ネザライトブロック1個で作った場合、
+                    <br />
+                    効果範囲は50×(1+0×81+0.01×49+0.02×25+0.1×8+15×1)=889.5ブロックになります。
+                    <table border={1}>
+                        <thead>
+                            <tr>
+                                <th>ブロック</th>
+                                <th>1個あたりの倍率の増加幅</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>鉄ブロック</td>
+                                <td>+0倍</td>
+                            </tr>
+                            <tr>
+                                <td>金ブロック</td>
+                                <td>+0.01倍</td>
+                            </tr>
+                            <tr>
+                                <td>エメラルドブロック</td>
+                                <td>+0.02倍</td>
+                            </tr>
+                            <tr>
+                                <td>ダイヤモンドブロック</td>
+                                <td>+0.1倍</td>
+                            </tr>
+                            <tr>
+                                <td>ネザライトブロック</td>
+                                <td>+15倍</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </li>
+            </ul>
             <h2>導入プラグイン</h2>
             <ul>
                 <li>
@@ -150,8 +186,4 @@ export default function Home() {
             </ul>
         </main>
     );
-}
-
-function New() {
-    return <span style={{ backgroundColor: "red", color: "white", fontSize: "8pt", fontWeight: "bold" }}>NEW!</span>;
 }
