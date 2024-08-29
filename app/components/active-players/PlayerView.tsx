@@ -60,7 +60,7 @@ export const PlayerView: React.FC<{ player: Player }> = ({ player }) => {
                         <PlayingTime player={player} />
                     </span>
                     <span style={{ color: "#555", fontSize: "0.6em" }}>
-                        <Health health={player.health} maxHealth={player.maxHealth} />
+                        <Health health={player.health} maxHealth={player.max_health} />
                     </span>
                 </div>
             </div>

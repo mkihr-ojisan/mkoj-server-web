@@ -155,11 +155,11 @@ export class MkojServerWebSocketClient {
 export type Player = {
     name: string;
     uuid: string;
-    lastLogin: number;
+    last_login: number;
     type: "java" | "bedrock";
     afk: boolean;
     health: number;
-    maxHealth: number;
+    max_health: number;
     armor: number;
     food: number;
 };
