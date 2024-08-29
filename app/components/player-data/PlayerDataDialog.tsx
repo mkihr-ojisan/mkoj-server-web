@@ -41,46 +41,46 @@ export const PlayerInfoDialog: React.FC<PlayerInfoDialogProps> = ({ uuid, open, 
 
                 <dt>最後に死亡した場所</dt>
                 <dd>
-                    {data?.lastDeathLocation
-                        ? `${data?.lastDeathLocation?.world}/${data?.lastDeathLocation?.x},${data?.lastDeathLocation?.y},${data?.lastDeathLocation?.z}`
+                    {data?.last_death_location
+                        ? `${data?.last_death_location?.world}/${data?.last_death_location?.x},${data?.last_death_location?.y},${data?.last_death_location?.z}`
                         : "なし"}
                 </dd>
 
                 <dt>ベッドのスポーン地点</dt>
                 <dd>
-                    {data?.bedSpawnLocation
-                        ? `${data?.bedSpawnLocation?.world}/${data?.bedSpawnLocation?.x},${data?.bedSpawnLocation?.y},${data?.bedSpawnLocation?.z}`
+                    {data?.bed_spawn_location
+                        ? `${data?.bed_spawn_location?.world}/${data?.bed_spawn_location?.x},${data?.bed_spawn_location?.y},${data?.bed_spawn_location?.z}`
                         : "なし"}
                 </dd>
 
                 <dt>初回ログイン</dt>
-                <dd>{data?.firstPlayed && new Date(data?.firstPlayed).toLocaleString()}</dd>
+                <dd>{data?.first_played && new Date(data?.first_played).toLocaleString()}</dd>
 
                 <dt>最終ログイン</dt>
-                <dd>{data?.lastLogin && new Date(data?.lastLogin).toLocaleString()}</dd>
+                <dd>{data?.last_login && new Date(data?.last_login).toLocaleString()}</dd>
 
                 <dt>プレイヤーがサーバー上で最後に確認された日時</dt>
-                <dd>{data?.lastSeen && new Date(data?.lastSeen).toLocaleString()}</dd>
+                <dd>{data?.last_seen && new Date(data?.last_seen).toLocaleString()}</dd>
 
-                {data?.isOnline && (
+                {data?.is_online && (
                     <>
                         <dt>位置</dt>
                         <dd>
-                            {data?.onlinePlayerData.location.world}/{data?.onlinePlayerData.location.x},{data?.onlinePlayerData.location.y},
-                            {data?.onlinePlayerData.location.z}
+                            {data?.online_player_data.location.world}/{data?.online_player_data.location.x},{data?.online_player_data.location.y},
+                            {data?.online_player_data.location.z}
                         </dd>
 
                         <dt>レベル</dt>
-                        <dd>{data?.onlinePlayerData.level}</dd>
+                        <dd>{data?.online_player_data.level}</dd>
 
                         <dt>経験値</dt>
-                        <dd>{data?.onlinePlayerData.exp}</dd>
+                        <dd>{data?.online_player_data.exp}</dd>
 
                         <dt>言語</dt>
-                        <dd>{data?.onlinePlayerData.locale}</dd>
+                        <dd>{data?.online_player_data.locale}</dd>
 
                         <dt>Ping</dt>
-                        <dd>{data?.onlinePlayerData.ping}</dd>
+                        <dd>{data?.online_player_data.ping}</dd>
                     </>
                 )}
             </dl>
@@ -100,7 +100,7 @@ export const PlayerInfoDialog: React.FC<PlayerInfoDialogProps> = ({ uuid, open, 
             <details>
                 <summary>アイテムの統計</summary>
                 <dl>
-                    {Object.entries(data?.itemStats ?? {}).map(([key, value]) => (
+                    {Object.entries(data?.item_stats ?? {}).map(([key, value]) => (
                         <div key={key}>
                             <dt>
                                 {(ja_jp as Record<string, string>)[`block.minecraft.${key.replace("minecraft:", "")}`] ??
@@ -119,28 +119,28 @@ export const PlayerInfoDialog: React.FC<PlayerInfoDialogProps> = ({ uuid, open, 
             <details>
                 <summary>Mobの統計</summary>
                 <dl>
-                    {Object.entries(data?.mobStats ?? {}).map(([key, value]) => (
+                    {Object.entries(data?.mob_stats ?? {}).map(([key, value]) => (
                         <div key={key}>
                             <dt>{(ja_jp as Record<string, string>)[`entity.minecraft.${key.replace("minecraft:", "")}`] ?? key}</dt>
                             <dd>
-                                倒した: {value.killed}, 倒された: {value.killedBy}
+                                倒した: {value.killed}, 倒された: {value.killed_by}
                             </dd>
                         </div>
                     ))}
                 </dl>
             </details>
 
-            {data?.isOnline && (
+            {data?.is_online && (
                 <details>
                     <summary>進捗</summary>
                     <dl>
-                        {Object.values(data?.onlinePlayerData.advancements ?? {})
+                        {Object.values(data?.online_player_data.advancements ?? {})
                             .filter((a) => !!a.display)
                             .map((a) => {
                                 return (
                                     <Fragment key={a.name}>
                                         <dt>{(ja_jp as Record<string, string>)["advancements." + a.name.replace("/", ".") + ".title"] ?? a.name}</dt>
-                                        <dd>{a.isDone ? "達成済み" : "未達成"}</dd>
+                                        <dd>{a.is_done ? "達成済み" : "未達成"}</dd>
                                     </Fragment>
                                 );
                             })}

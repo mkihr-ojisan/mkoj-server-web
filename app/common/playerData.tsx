@@ -3,24 +3,24 @@ import { UseQueryResult, useQuery } from "react-query";
 export type PlayerData = {
     name: string;
     uuid: string;
-    lastDeathLocation?: LocationData;
-    bedSpawnLocation?: LocationData;
-    firstPlayed: number;
-    lastLogin: number;
-    lastSeen: number;
-    isBanned: boolean;
-    isWhitelisted: boolean;
-    isOp: boolean;
+    last_death_location?: LocationData;
+    bed_spawn_location?: LocationData;
+    first_played: number;
+    last_login: number;
+    last_seen: number;
+    is_banned: boolean;
+    is_whitelisted: boolean;
+    is_op: boolean;
     stats: Record<string, number>;
-    itemStats: Record<string, ItemStats>;
-    mobStats: Record<string, MobStats>;
+    item_stats: Record<string, ItemStats>;
+    mob_stats: Record<string, MobStats>;
 } & (
     | {
-          isOnline: true;
-          onlinePlayerData: OnlinePlayerData;
+          is_online: true;
+          online_player_data: OnlinePlayerData;
       }
     | {
-          isOnline: false;
+          is_online: false;
       }
 );
 
@@ -35,7 +35,7 @@ export type ItemStats = {
 
 export type MobStats = {
     killed: number;
-    killedBy: number;
+    killed_by: number;
 };
 
 export type LocationData = {
@@ -51,15 +51,15 @@ export type OnlinePlayerData = {
     level: number;
     locale: string;
     ping: number;
-    playerTime: number;
-    playerTimeOffset: number;
-    walkSpeed: number;
-    isAllowingServerListings: boolean;
-    isFlying: boolean;
-    isSleepingIgnored: boolean;
-    isSneaking: boolean;
-    isSprinting: boolean;
-    uniqueId: string;
+    player_time: number;
+    player_time_offset: number;
+    walk_speed: number;
+    is_allowing_server_listings: boolean;
+    is_flying: boolean;
+    is_sleeping_ignored: boolean;
+    is_sneaking: boolean;
+    is_sprinting: boolean;
+    unique_id: string;
     advancements?: Record<string, Advancement>;
     attributes?: Record<string, number | null>;
 };
@@ -68,12 +68,12 @@ export type Advancement = {
     name: string;
     display?: {
         title: string;
-        displayName: string;
+        display_name: string;
         description: string;
     };
-    isDone: boolean;
-    awardedCriteria: string[];
-    remainingCriteria: string[];
+    is_done: boolean;
+    awarded_criteria: string[];
+    remaining_criteria: string[];
 };
 
 export async function fetchPlayerData(uuid: string): Promise<PlayerData> {
