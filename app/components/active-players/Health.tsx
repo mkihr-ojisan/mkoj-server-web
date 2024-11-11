@@ -6,8 +6,8 @@ export const Health: React.FC<{ health: number; maxHealth: number; color?: strin
     color,
     fontSize,
 }) => {
-    const intHealth = Math.round(health);
-    const intMaxHealth = Math.round(maxHealth);
+    const intHealth = Math.ceil(health);
+    const intMaxHealth = Math.ceil(maxHealth);
     const heartCount = Math.floor(intHealth / 2);
     const totalHearts = Math.ceil(intMaxHealth / 2);
     const hasHalfHeart = intHealth % 2 === 1;
