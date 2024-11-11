@@ -162,6 +162,7 @@ export type Player = {
     max_health: number;
     armor: number;
     food: number;
+    game_mode: "SURVIVAL" | "CREATIVE" | "ADVENTURE" | "SPECTATOR";
 };
 
 export class PlayerJoinEvent extends Event {

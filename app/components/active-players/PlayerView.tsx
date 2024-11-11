@@ -59,9 +59,15 @@ export const PlayerView: React.FC<{ player: Player }> = ({ player }) => {
                     <span style={{ color: "#555", fontSize: "0.6em", gap: "8px" }}>
                         <PlayingTime player={player} />
                     </span>
-                    <span style={{ color: "#555", fontSize: "0.6em" }}>
-                        <Health health={player.health} maxHealth={player.max_health} />
-                    </span>
+                    {player.game_mode === "SURVIVAL" ? (
+                        <span style={{ color: "#555", fontSize: "0.6em" }}>
+                            <Health health={player.health} maxHealth={player.max_health} />
+                        </span>
+                    ) : (
+                        <span style={{ fontSize: "0.6em" }}>
+                            <span style={{ backgroundColor: "rgba(255,0,0,0.5)", color: "white", paddingInline: "5px" }}>管理作業中</span>
+                        </span>
+                    )}
                 </div>
             </div>
 
