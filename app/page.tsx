@@ -89,9 +89,6 @@ export default function Home() {
                 看板を設置することでチェスト、ドア等を保護できます。
                 <a href="https://www.spigotmc.org/resources/blocklocker.3268/field?field=documentation">使い方</a>
             </p>
-            <h3>Minecart Speed Plus</h3>
-            <p>パワードレールの横か下に看板を設置することでトロッコの速さを0〜50倍にできます。曲がるときは減速しないといけないらしい。</p>
-            <p>看板の1行目は「[msp]」、2行目には倍率を書く。</p>
             <h3>mkoj-server-plugin</h3>
             <ul>
                 <li style={{ marginBottom: "8px" }}>白色の羊毛で音符ブロックを右クリックするとミュートします。ミュートしてもアレイは反応します。</li>
@@ -132,6 +129,17 @@ export default function Home() {
                         </tbody>
                     </table>
                 </li>
+                <li>
+                    レールの周辺(dx=-1..1,dy=-2..2,dz=-1..1)に看板を設置することでトロッコを任意の速さにできます。
+                    <br />
+                    看板の1行目は「[msp]」、2行目には速さを書く。速さにつけられる単位は以下の通り。
+                    <ul>
+                        <li>(なし): 普通の速さに対する倍率</li>
+                        <li>km/h</li>
+                        <li>m/s</li>
+                        <li>m/tick</li>
+                    </ul>
+                </li>
             </ul>
             <h2>導入プラグイン</h2>
             <ul>
@@ -160,9 +168,6 @@ export default function Home() {
                 </li>
                 <li>
                     <a href="https://luckperms.net/">LuckPerms</a> - 権限を管理するやつ
-                </li>
-                <li>
-                    <a href="https://www.spigotmc.org/resources/minecart-speed-plus.69639/">Minecart Speed Plus</a> - トロッコの速さを変えられるやつ
                 </li>
                 <li>
                     <a href="https://www.spigotmc.org/resources/protocollib.1997/">ProtocolLib</a> - 前提プラグイン的なやつ
