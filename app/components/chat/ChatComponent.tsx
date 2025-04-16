@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { PlayerHead } from "../PlayerHead";
 import ja_jp from "./ja_jp.json";
+import { PlayerInfoDialog } from "../player-data/PlayerDataDialog";
 
 export type ChatComponentProps = {
     component: any;
@@ -9,6 +11,8 @@ export const ChatComponent: React.FC<ChatComponentProps> = ({ component }) => {
     if (typeof component !== "object" || component === null) {
         return null;
     }
+
+    const [playerInfoDialogOpen, setPlayerInfoDialogOpen] = useState(false);
 
     if ("text" in component) {
         if (component.hoverEvent?.contents?.id) {
@@ -37,8 +41,12 @@ export const ChatComponent: React.FC<ChatComponentProps> = ({ component }) => {
 
             return (
                 <>
-                    <PlayerHead uuid={uuid} width={16} height={16} alt={component.text ?? "Unknown"} />
-                    <span>{component.text}</span>
+                    <span onClick={() => setPlayerInfoDialogOpen(true)} style={{ cursor: "pointer" }}>
+                        <PlayerHead uuid={uuid} width={16} height={16} alt={component.text ?? "Unknown"} />
+                        <span>{component.text}</span>
+                    </span>
+
+                    <PlayerInfoDialog uuid={uuid} open={playerInfoDialogOpen} onClose={() => setPlayerInfoDialogOpen(false)} />
                 </>
             );
         } else {
